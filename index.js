@@ -13,8 +13,6 @@ createGrid = () => {
   }
 };
 
-createGrid();
-
 //create user specified grid with prompted grid size
 
 createNewGrid = () => {
@@ -25,6 +23,8 @@ createNewGrid = () => {
     const div = document.createElement("div");
     div.classList.add("square");
     grid.appendChild(div);
+    square = grid.querySelectorAll("div");
+    paint();
   }
 };
 
@@ -32,21 +32,22 @@ btnNewGrid.addEventListener("click", createNewGrid);
 
 let square = grid.querySelectorAll("div");
 
-//add event listener to each square and change background if mouseovered
-
-square.forEach((square) =>
-  square.addEventListener("mouseover", (e) => {
-    square.classList.add("black");
-  })
-);
-
 reset.addEventListener("click", function (e) {
   grid.innerHTML = "";
   createGrid();
+  paint();
+});
+
+createGrid();
+paint();
+
+//add event listener to each square and change background if mouseovered
+
+function paint() {
   square = grid.querySelectorAll("div");
   square.forEach((square) =>
     square.addEventListener("mouseover", (e) => {
       square.classList.add("black");
     })
   );
-});
+}
